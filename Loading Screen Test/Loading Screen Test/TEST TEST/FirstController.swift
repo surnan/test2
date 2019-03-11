@@ -42,7 +42,7 @@ class FirstController: UIViewController {
             blueBackGround.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
             ])
         
-        sleep(2)
+        sleep(3)
     navigationController?.pushViewController(FirstCollectionView(), animated: true)
         
     }

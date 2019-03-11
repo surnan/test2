@@ -12,8 +12,39 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     
     let reuseIndentifier = "asdf"
     
-    var myCollectionView: UICollectionView!
+
+    let layout: UICollectionViewFlowLayout = {
+        let temp = UICollectionViewFlowLayout()
+        temp.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        temp.itemSize = CGSize(width: 100, height: 100)
+        return temp
+    }()
     
+    
+    lazy var myCollectionView: UICollectionView = {
+        var myCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        myCollectionView.dataSource = self
+        myCollectionView.delegate = self
+        myCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIndentifier)
+        myCollectionView.showsVerticalScrollIndicator = false
+        myCollectionView.backgroundColor = UIColor.black
+        return myCollectionView
+    }()
+    
+    
+    lazy var myButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("click me", for: .normal)
+        button.backgroundColor = UIColor.white
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.addTarget(self, action: #selector(handleMyButton(_:)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc func handleMyButton(_ sender: UIButton){
+        print("Hello World")
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,38 +63,28 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     
 
     override func viewDidLoad() {
-        print("here i am")
-        
         view.backgroundColor = UIColor.blue
+
         
-        //        layout.itemSize = CGSize(width: view.frame.width, height: 700)
+        [myCollectionView, myButton].forEach{
+            view.addSubview($0)
+        }
         
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: 100, height: 100)
-        
-        
-//        myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * CGFloat(0.75))
-        myCollectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
-        
-        
-        
-        
-        
-        myCollectionView.dataSource = self
-        myCollectionView.delegate = self
-        myCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIndentifier)
-        myCollectionView.showsVerticalScrollIndicator = false
-        myCollectionView.backgroundColor = UIColor.black
-        self.view.addSubview(myCollectionView)
+        setupCollectionView()
     }
     
     
-    
-    
-    
-    
-    
+    func setupCollectionView(){
+        myCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            myButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            myButton.widthAnchor.constraint(equalTo: view.widthAnchor),
+            myButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            myCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            myCollectionView.bottomAnchor.constraint(equalTo: myButton.topAnchor, constant: -20),
+            myCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            myCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            ])
+    }
 }
