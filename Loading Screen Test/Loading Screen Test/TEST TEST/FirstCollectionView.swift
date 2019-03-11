@@ -86,7 +86,7 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     
     func setupMapView() {
         let firstAnnotation = MKPointAnnotation()
-        firstAnnotation.coordinate = CLLocationCoordinate2D(latitude: 40.74504362124605, longitude: 73.98898440646418)
+        firstAnnotation.coordinate = CLLocationCoordinate2D(latitude: 40.74504362124605, longitude: -73.98898440646418)
         myMapView.addAnnotation(firstAnnotation)
         myMapView.centerCoordinate = firstAnnotation.coordinate
     }
