@@ -12,15 +12,15 @@ import MapKit
 class FirstCollectionView: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let reuseIndentifier = "asdf"
-    
 
     let layout: UICollectionViewFlowLayout = {
         let temp = UICollectionViewFlowLayout()
-        temp.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        temp.itemSize = CGSize(width: 100, height: 100)
+        temp.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        temp.itemSize = .init(width: 100, height:   100)
+        temp.scrollDirection = .vertical
+        temp.minimumLineSpacing = 20
         return temp
     }()
-    
     
     lazy var myCollectionView: UICollectionView = {
         var myCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -31,7 +31,6 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         myCollectionView.backgroundColor = UIColor.black
         return myCollectionView
     }()
-    
     
     lazy var myButton: UIButton = {
        let button = UIButton()
@@ -44,16 +43,24 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     }()
     
     
-    var myMapView = MKMapView()
+    var myMapView: MKMapView = {
+       let map = MKMapView()
+        map.isScrollEnabled = true
+        map.isZoomEnabled = true
+        map.mapType = .standard
+        map.showsCompass = true //not working on simulator
+        map.translatesAutoresizingMaskIntoConstraints = false
+        return map
+    }()
     
-
+    
     @objc func handleMyButton(_ sender: UIButton){
         print("Hello World")
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,17 +70,29 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        return .init(top: 20, left: 20, bottom: 20, right: 20)
     }
     
 
+ 
+    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.blue
-        myMapView.translatesAutoresizingMaskIntoConstraints = false
-        
+        setupMapView()
         [myMapView, myCollectionView, myButton].forEach{ view.addSubview($0) }
         setupCollectionView()
     }
+    
+    
+    func setupMapView() {
+        let firstAnnotation = MKPointAnnotation()
+        firstAnnotation.coordinate = CLLocationCoordinate2D(latitude: 40.74504362124605, longitude: 73.98898440646418)
+        myMapView.addAnnotation(firstAnnotation)
+        myMapView.centerCoordinate = firstAnnotation.coordinate
+    }
+    
+    
+    
     
     
     func setupCollectionView(){
@@ -82,8 +101,7 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
             myMapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             myMapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             myMapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            myMapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
-            
+            myMapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65),
             
             myButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             myButton.widthAnchor.constraint(equalTo: view.widthAnchor),
@@ -93,6 +111,7 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
             myCollectionView.bottomAnchor.constraint(equalTo: myButton.topAnchor, constant: -10),
             myCollectionView.leadingAnchor.constraint(equalTo: myMapView.leadingAnchor),
             myCollectionView.trailingAnchor.constraint(equalTo: myMapView.trailingAnchor),
+            
             ])
     }
 }
