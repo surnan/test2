@@ -78,17 +78,36 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.blue
+        setupNavigationMenu()
         setupMapView()
         [myMapView, myCollectionView, myButton].forEach{ view.addSubview($0) }
         setupCollectionView()
     }
     
+    func setupNavigationMenu(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Re-Center", style: .done, target: self, action: #selector(handleReCenter))
+    }
+    
+    
+    let firstAnnotation: MKPointAnnotation = {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: 40.74504362124605, longitude: -73.98898440646418)
+        return annotation
+    }()
+    
+    
+    @objc func handleReCenter(){
+        myMapView.centerCoordinate = firstAnnotation.coordinate
+    }
+    
     
     func setupMapView() {
-        let firstAnnotation = MKPointAnnotation()
-        firstAnnotation.coordinate = CLLocationCoordinate2D(latitude: 40.74504362124605, longitude: -73.98898440646418)
         myMapView.addAnnotation(firstAnnotation)
         myMapView.centerCoordinate = firstAnnotation.coordinate
+        //Setting up Zoom
+        let noLocation = firstAnnotation.coordinate
+        let viewRegion = MKCoordinateRegion(center: noLocation, latitudinalMeters: 200, longitudinalMeters: 200)
+        myMapView.setRegion(viewRegion, animated: false)
     }
     
     
@@ -101,7 +120,7 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
             myMapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             myMapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             myMapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            myMapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65),
+            myMapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
             
             myButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             myButton.widthAnchor.constraint(equalTo: view.widthAnchor),
