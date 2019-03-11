@@ -11,14 +11,17 @@ import MapKit
 
 class FirstCollectionView: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    let reuseIndentifier = "asdf"
+    let idPlain = "asdf"
+    let idCar = "asdfCARCAR"
+    let idStreet = "asdfasdfSTREETSTREET"
 
     let layout: UICollectionViewFlowLayout = {
         let temp = UICollectionViewFlowLayout()
         temp.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-        temp.itemSize = .init(width: 100, height:   100)
+        temp.itemSize = .init(width: 75, height:   75)
         temp.scrollDirection = .vertical
-        temp.minimumLineSpacing = 20
+        temp.minimumLineSpacing = 10
+        temp.minimumInteritemSpacing = 10
         return temp
     }()
     
@@ -26,7 +29,11 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         var myCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
-        myCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIndentifier)
+        myCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: idPlain)
+        myCollectionView.register(FirstCollectionCellCar.self, forCellWithReuseIdentifier: idCar)
+        myCollectionView.register(FirstCollectionCellStreet.self, forCellWithReuseIdentifier: idStreet)
+        
+        
         myCollectionView.showsVerticalScrollIndicator = false
         myCollectionView.backgroundColor = UIColor.black
         myCollectionView.allowsMultipleSelection = true
@@ -53,10 +60,7 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         }
     }
     
-    
-    
-    
-    
+
     var myMapView: MKMapView = {
        let map = MKMapView()
         map.isScrollEnabled = true
@@ -71,23 +75,43 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     @objc func handleMyButton(_ sender: UIButton){
         print("Hello World")
         sender.isSelected = !sender.isSelected
+        
+        if sender.isSelected {
+            //delete stuff
+            
+            deleteIndexSet.forEach { (temp) in
+                <#code#>
+            }
+            
+            
+        } else {
+            
+        }
+        
+        
+        
+        
     }
     
     
     //MARK:-CollectionView
     
+    var arrayForCollectionView = ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", ]
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 14
+        return arrayForCollectionView.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = myCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIndentifier, for: indexPath)
+        print("cell for --> \(indexPath)")
         if deleteIndexSet.contains(indexPath){
-            cell.backgroundColor = UIColor.green
+            let cell = myCollectionView.dequeueReusableCell(withReuseIdentifier: idCar, for: indexPath) as! FirstCollectionCellCar
+             return cell
         } else {
-            cell.backgroundColor = UIColor.yellow
+            let cell = myCollectionView.dequeueReusableCell(withReuseIdentifier: idStreet, for: indexPath) as! FirstCollectionCellStreet
+             return cell
         }
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -95,13 +119,13 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Selected Cell = \(indexPath)")
+        
         if deleteIndexSet.contains(indexPath) {
             deleteIndexSet.remove(indexPath)
         } else {
             deleteIndexSet.insert(indexPath)
         }
-        
-        
         myCollectionView.reloadItems(at: [indexPath])
     }
     
