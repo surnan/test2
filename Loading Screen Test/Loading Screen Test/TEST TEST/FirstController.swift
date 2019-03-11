@@ -30,9 +30,7 @@ class FirstController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.darkGray
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleButton))
-        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleButton)),  UIBarButtonItem(title: "View", style: .done, target: self, action: #selector(handleButton2))]
         
         
         [blueBackGround].forEach{view.addSubview($0)}
@@ -43,6 +41,10 @@ class FirstController: UIViewController {
             blueBackGround.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             blueBackGround.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
             ])
+        
+        sleep(2)
+    navigationController?.pushViewController(FirstCollectionView(), animated: true)
+        
     }
     
     
@@ -53,5 +55,14 @@ class FirstController: UIViewController {
     }
     
 
+    @objc func handleButton2(){
+        
+        navigationController?.pushViewController(FirstCollectionView(), animated: true)
+        
+//        let newController = MyCollectionController(collectionViewLayout: UICollectionViewFlowLayout())
+//        navigationController?.pushViewController(newController, animated: true)
+    }
+    
+    
 }
 

@@ -63,11 +63,6 @@ class MyCollectionCell:UICollectionViewCell{
     
     override func prepareForReuse() {
         super.prepareForReuse()
-    
-//        if let temp = self.myActivityIndicatorView {
-//
-//        }
-        
         self.myActivityIndicatorView.startAnimating()
     }
 }

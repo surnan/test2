@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8417190222363B3600F47D7B /* FirstCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417190122363B3600F47D7B /* FirstCollectionView.swift */; };
+		84D6686A2236A028008B7FEC /* asdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D668692236A028008B7FEC /* asdf.swift */; };
 		84E42F852234C1AC00A32494 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E42F842234C1AC00A32494 /* AppDelegate.swift */; };
 		84E42F872234C1AC00A32494 /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E42F862234C1AC00A32494 /* FirstController.swift */; };
 		84E42F8C2234C1AE00A32494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E42F8B2234C1AE00A32494 /* Assets.xcassets */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8417190122363B3600F47D7B /* FirstCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCollectionView.swift; sourceTree = "<group>"; };
+		84D668692236A028008B7FEC /* asdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = asdf.swift; sourceTree = "<group>"; };
 		84E42F812234C1AC00A32494 /* Loading Screen Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Loading Screen Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E42F842234C1AC00A32494 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E42F862234C1AC00A32494 /* FirstController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstController.swift; sourceTree = "<group>"; };
@@ -39,6 +43,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8417190022363B0400F47D7B /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				84E42F842234C1AC00A32494 /* AppDelegate.swift */,
+				84E42F8B2234C1AE00A32494 /* Assets.xcassets */,
+				84E42F8D2234C1AE00A32494 /* LaunchScreen.storyboard */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		84D6686B2236A073008B7FEC /* TEST TEST */ = {
+			isa = PBXGroup;
+			children = (
+				84E42F862234C1AC00A32494 /* FirstController.swift */,
+				8417190122363B3600F47D7B /* FirstCollectionView.swift */,
+			);
+			path = "TEST TEST";
+			sourceTree = "<group>";
+		};
 		84E42F782234C1AC00A32494 = {
 			isa = PBXGroup;
 			children = (
@@ -59,10 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				84E751AC2234EDCD00034D33 /* CollectionViewController */,
-				84E42F842234C1AC00A32494 /* AppDelegate.swift */,
-				84E42F862234C1AC00A32494 /* FirstController.swift */,
-				84E42F8B2234C1AE00A32494 /* Assets.xcassets */,
-				84E42F8D2234C1AE00A32494 /* LaunchScreen.storyboard */,
+				84D6686B2236A073008B7FEC /* TEST TEST */,
+				8417190022363B0400F47D7B /* Support */,
 				84E42F902234C1AE00A32494 /* Info.plist */,
 			);
 			path = "Loading Screen Test";
@@ -74,6 +95,7 @@
 				84E42F962234C8CE00A32494 /* MyCollectionController.swift */,
 				84E42F982234CFD500A32494 /* MyCollectionCell.swift */,
 				84E751AD2235802F00034D33 /* AnotherCollectionCell.swift */,
+				84D668692236A028008B7FEC /* asdf.swift */,
 			);
 			path = CollectionViewController;
 			sourceTree = "<group>";
@@ -150,8 +172,10 @@
 			files = (
 				84E42F872234C1AC00A32494 /* FirstController.swift in Sources */,
 				84E751AE2235802F00034D33 /* AnotherCollectionCell.swift in Sources */,
+				84D6686A2236A028008B7FEC /* asdf.swift in Sources */,
 				84E42F852234C1AC00A32494 /* AppDelegate.swift in Sources */,
 				84E42F972234C8CE00A32494 /* MyCollectionController.swift in Sources */,
+				8417190222363B3600F47D7B /* FirstCollectionView.swift in Sources */,
 				84E42F992234CFD500A32494 /* MyCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
