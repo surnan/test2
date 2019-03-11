@@ -29,19 +29,37 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         myCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIndentifier)
         myCollectionView.showsVerticalScrollIndicator = false
         myCollectionView.backgroundColor = UIColor.black
+        myCollectionView.allowsMultipleSelection = true
         return myCollectionView
     }()
     
     lazy var myButton: UIButton = {
        let button = UIButton()
-        button.setTitle("click me", for: .normal)
+        button.setTitle("New Collection", for: .normal)
         button.backgroundColor = UIColor.white
         button.setTitleColor(UIColor.black, for: .normal)
+        
+        button.setTitle("Remove Selected Pictures", for: .selected)
+        button.setTitleColor(UIColor.red, for: .selected)
+        
         button.addTarget(self, action: #selector(handleMyButton(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    
+    //Should this be "SET" ?
+    var indexPathArrayToDelete = [IndexPath](){
+        didSet {
+            indexPathArrayToDelete.forEach{print("Current Entry --> \($0)")}
+            
+            if indexPathArrayToDelete.count == 0 {
+                myButton.isSelected = false
+            } else {
+                myButton.isSelected = true
+            }
+        }
+    }
     
     var myMapView: MKMapView = {
        let map = MKMapView()
@@ -56,16 +74,23 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     
     @objc func handleMyButton(_ sender: UIButton){
         print("Hello World")
+        sender.isSelected = !sender.isSelected
     }
     
     
+    //MARK:-CollectionView
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return 14
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = myCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIndentifier, for: indexPath)
-        cell.backgroundColor = UIColor.yellow
+        if indexPathArrayToDelete.contains(indexPath){
+            cell.backgroundColor = UIColor.green
+        } else {
+            cell.backgroundColor = UIColor.yellow
+        }
         return cell
     }
     
@@ -73,9 +98,15 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         return .init(top: 20, left: 20, bottom: 20, right: 20)
     }
     
-
- 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Selected cell at: \(indexPath)")
+        indexPathArrayToDelete.append(indexPath)
+        let tempCell = myCollectionView.cellForItem(at: indexPath)
+        tempCell?.backgroundColor = UIColor.green
+    }
     
+
+    //MARK:- overloads  ui
     override func viewDidLoad() {
         view.backgroundColor = UIColor.blue
         setupNavigationMenu()
@@ -88,18 +119,15 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Re-Center", style: .done, target: self, action: #selector(handleReCenter))
     }
     
-    
     let firstAnnotation: MKPointAnnotation = {
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: 40.74504362124605, longitude: -73.98898440646418)
         return annotation
     }()
     
-    
     @objc func handleReCenter(){
         myMapView.centerCoordinate = firstAnnotation.coordinate
     }
-    
     
     func setupMapView() {
         myMapView.addAnnotation(firstAnnotation)
@@ -109,10 +137,6 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         let viewRegion = MKCoordinateRegion(center: noLocation, latitudinalMeters: 200, longitudinalMeters: 200)
         myMapView.setRegion(viewRegion, animated: false)
     }
-    
-    
-    
-    
     
     func setupCollectionView(){
         myCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +154,6 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
             myCollectionView.bottomAnchor.constraint(equalTo: myButton.topAnchor, constant: -10),
             myCollectionView.leadingAnchor.constraint(equalTo: myMapView.leadingAnchor),
             myCollectionView.trailingAnchor.constraint(equalTo: myMapView.trailingAnchor),
-            
             ])
     }
 }
