@@ -34,12 +34,23 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     override func viewDidLoad() {
         print("here i am")
         
+        view.backgroundColor = UIColor.blue
+        
         //        layout.itemSize = CGSize(width: view.frame.width, height: 700)
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 100, height: 100)
-        myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        
+        
+//        myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * CGFloat(0.75))
+        myCollectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+        
+        
+        
+        
         
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
@@ -48,6 +59,9 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         myCollectionView.backgroundColor = UIColor.black
         self.view.addSubview(myCollectionView)
     }
+    
+    
+    
     
     
     
