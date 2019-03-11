@@ -47,19 +47,15 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         return button
     }()
     
-    
-    //Should this be "SET" ?
-    var indexPathArrayToDelete = [IndexPath](){
+    var deleteIndexSet = Set<IndexPath>() {
         didSet {
-            indexPathArrayToDelete.forEach{print("Current Entry --> \($0)")}
-            
-            if indexPathArrayToDelete.count == 0 {
-                myButton.isSelected = false
-            } else {
-                myButton.isSelected = true
-            }
+            myButton.isSelected = !deleteIndexSet.isEmpty
         }
     }
+    
+    
+    
+    
     
     var myMapView: MKMapView = {
        let map = MKMapView()
@@ -86,7 +82,7 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = myCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIndentifier, for: indexPath)
-        if indexPathArrayToDelete.contains(indexPath){
+        if deleteIndexSet.contains(indexPath){
             cell.backgroundColor = UIColor.green
         } else {
             cell.backgroundColor = UIColor.yellow
@@ -99,10 +95,14 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected cell at: \(indexPath)")
-        indexPathArrayToDelete.append(indexPath)
-        let tempCell = myCollectionView.cellForItem(at: indexPath)
-        tempCell?.backgroundColor = UIColor.green
+        if deleteIndexSet.contains(indexPath) {
+            deleteIndexSet.remove(indexPath)
+        } else {
+            deleteIndexSet.insert(indexPath)
+        }
+        
+        
+        myCollectionView.reloadItems(at: [indexPath])
     }
     
 
