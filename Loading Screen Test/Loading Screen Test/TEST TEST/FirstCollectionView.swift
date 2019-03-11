@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class FirstCollectionView: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -42,6 +43,10 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
         return button
     }()
     
+    
+    var myMapView = MKMapView()
+    
+
     @objc func handleMyButton(_ sender: UIButton){
         print("Hello World")
     }
@@ -64,12 +69,9 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
 
     override func viewDidLoad() {
         view.backgroundColor = UIColor.blue
-
+        myMapView.translatesAutoresizingMaskIntoConstraints = false
         
-        [myCollectionView, myButton].forEach{
-            view.addSubview($0)
-        }
-        
+        [myMapView, myCollectionView, myButton].forEach{ view.addSubview($0) }
         setupCollectionView()
     }
     
@@ -77,14 +79,20 @@ class FirstCollectionView: UIViewController, UICollectionViewDataSource, UIColle
     func setupCollectionView(){
         myCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            myMapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            myMapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            myMapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
+            myMapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
+            
+            
             myButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             myButton.widthAnchor.constraint(equalTo: view.widthAnchor),
             myButton.heightAnchor.constraint(equalToConstant: 30),
             
-            myCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            myCollectionView.bottomAnchor.constraint(equalTo: myButton.topAnchor, constant: -20),
-            myCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            myCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            myCollectionView.topAnchor.constraint(equalTo: myMapView.bottomAnchor, constant: 10),
+            myCollectionView.bottomAnchor.constraint(equalTo: myButton.topAnchor, constant: -10),
+            myCollectionView.leadingAnchor.constraint(equalTo: myMapView.leadingAnchor),
+            myCollectionView.trailingAnchor.constraint(equalTo: myMapView.trailingAnchor),
             ])
     }
 }
