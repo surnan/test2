@@ -43,7 +43,7 @@ class FirstController: UIViewController {
             ])
         
         sleep(3)
-    navigationController?.pushViewController(FirstCollectionView(), animated: true)
+    navigationController?.pushViewController(FinalCollectionView(), animated: true)
         
     }
     
@@ -57,7 +57,7 @@ class FirstController: UIViewController {
 
     @objc func handleButton2(){
         
-        navigationController?.pushViewController(FirstCollectionView(), animated: true)
+        navigationController?.pushViewController(FinalCollectionView(), animated: true)
         
 //        let newController = MyCollectionController(collectionViewLayout: UICollectionViewFlowLayout())
 //        navigationController?.pushViewController(newController, animated: true)

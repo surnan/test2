@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8417190222363B3600F47D7B /* FirstCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417190122363B3600F47D7B /* FirstCollectionView.swift */; };
+		8417190222363B3600F47D7B /* FinalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417190122363B3600F47D7B /* FinalCollectionView.swift */; };
 		84D6686A2236A028008B7FEC /* asdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D668692236A028008B7FEC /* asdf.swift */; };
 		84D6686D2236FD67008B7FEC /* FirstCollectionCellStreet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6686C2236FD67008B7FEC /* FirstCollectionCellStreet.swift */; };
 		84D6686F2236FF03008B7FEC /* FirstCollectionCellCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6686E2236FF03008B7FEC /* FirstCollectionCellCar.swift */; };
@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8417190122363B3600F47D7B /* FirstCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCollectionView.swift; sourceTree = "<group>"; };
+		8417190122363B3600F47D7B /* FinalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalCollectionView.swift; sourceTree = "<group>"; };
 		84D668692236A028008B7FEC /* asdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = asdf.swift; sourceTree = "<group>"; };
 		84D6686C2236FD67008B7FEC /* FirstCollectionCellStreet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCollectionCellStreet.swift; sourceTree = "<group>"; };
 		84D6686E2236FF03008B7FEC /* FirstCollectionCellCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCollectionCellCar.swift; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				84E42F862234C1AC00A32494 /* FirstController.swift */,
-				8417190122363B3600F47D7B /* FirstCollectionView.swift */,
+				8417190122363B3600F47D7B /* FinalCollectionView.swift */,
 				84D6686C2236FD67008B7FEC /* FirstCollectionCellStreet.swift */,
 				84D6686E2236FF03008B7FEC /* FirstCollectionCellCar.swift */,
 			);
@@ -182,7 +182,7 @@
 				84E42F852234C1AC00A32494 /* AppDelegate.swift in Sources */,
 				84E42F972234C8CE00A32494 /* MyCollectionController.swift in Sources */,
 				84D6686D2236FD67008B7FEC /* FirstCollectionCellStreet.swift in Sources */,
-				8417190222363B3600F47D7B /* FirstCollectionView.swift in Sources */,
+				8417190222363B3600F47D7B /* FinalCollectionView.swift in Sources */,
 				84D6686F2236FF03008B7FEC /* FirstCollectionCellCar.swift in Sources */,
 				84E42F992234CFD500A32494 /* MyCollectionCell.swift in Sources */,
 			);

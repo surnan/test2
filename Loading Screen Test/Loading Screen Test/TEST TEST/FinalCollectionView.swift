@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class FirstCollectionView: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class FinalCollectionView: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let idPlain = "asdf"
     let idCar = "asdfCARCAR"
